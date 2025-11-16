@@ -1,0 +1,5 @@
+# Construir la imagen con tag mi-app-python:examen
+docker build -t mi-app-python:examen .
+
+# Ejecutar el contenedor en modo detached, mapear puerto 5000 y nombrarlo app-examen
+docker run -d -p 5000:5000 --name app-examen mi-app-python:examen

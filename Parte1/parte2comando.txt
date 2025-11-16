@@ -1,0 +1,54 @@
+docker volume create datos-examen
+Qué hace: Crea un volumen en Docker llamado datos-examen. Propósito: Permite persistir datos de la base de datos aunque el contenedor se detenga o se elimine
+
+docker run -d --name db-examen -e POSTGRES_PASSWORD=examen123 -e POSTGRES_DB=testdb -v datos-examen:/var/lib/postgresql/data -p 5432:5432 postgres:15-alpine
+-d → Ejecuta el contenedor en segundo plano (detached).
+
+--name db-examen → Nombre del contenedor.
+
+-e POSTGRES_PASSWORD=examen123 → Variable de entorno para la contraseña del usuario postgres.
+
+-e POSTGRES_DB=testdb → Crea una base de datos inicial llamada testdb.
+
+-v datos-examen:/var/lib/postgresql/data → Monta el volumen datos-examen en la ruta donde Postgres guarda sus datos.
+
+-p 5432:5432 → Mapea el puerto del host al contenedor para poder conectarse desde afuera.
+
+postgres:15-alpine → Imagen oficial de Postgres versión 15, ligera (alpine).
+
+docker ps
+Qué hace: Muestra los contenedores en ejecución. Salida esperada: Debes ver db-examen con puerto 5432 mapeado.
+
+docker logs db-examen
+Qué hace: Muestra la salida de Postgres mientras se inicia. Qué buscar: Mensaje tipo "database system is ready to accept connections" que indica que la base de datos está lista.
+
+docker stop db-examen
+Qué hace: Detiene el contenedor
+
+docker rm db-examen
+elimina el contenedor, pero los datos permanecen en el volumen datos-examen.
+
+docker run -d --name db-examen -e POSTGRES_PASSWORD=examen123 -e POSTGRES_DB=testdb -v datos-examen:/var/lib/postgresql/data -p 5432:5432 postgres:15-alpine
+Qué hace: Reinicia el contenedor usando el mismo volumen. Verificación: Los datos y la base de datos testdb deben seguir ahí.
+
+docker exec -it db-examen psql -U postgres -d testdb
+conecta al contenedor 
+
+\l
+Esto lista las bases de datos, testdb debe aparecer.
+
+\q
+con esto salimos
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,15 @@
+docker pull nginx:alpine
+
+docker run -d -p 8080:80 --name web-examen nginx:alpine
+
+docker ps
+
+docker logs web-examen
+
+docker inspect web-examen
+
+docker stop web-examen
+
+docker rm web-examen
+
+
