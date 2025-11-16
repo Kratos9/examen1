@@ -1,0 +1,17 @@
+docker compose up -d
+Comando para levantar todo el stack
+
+docker compose ps
+Comando para verificar que todos los servicios están corriendo
+
+curl.exe http://localhost:3000/
+Comandos para probar la API (curl) Probar endpoint raíz /
+
+curl.exe http://localhost:3000/salud
+Probar endpoint /salud
+
+docker compose logs -f
+Comando para ver logs de todos los servicios
+
+docker compose down
+Comando para detener y limpiar todo
